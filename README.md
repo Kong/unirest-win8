@@ -1,7 +1,6 @@
 # Unirest for Windows 8
 
-
-Unirest is a set of lightweight HTTP libraries available in PHP, Ruby, Python, Java, Objective-C, etc...
+Unirest is a set of lightweight HTTP libraries available in multiple languages.
 
 This is a port of the .NET library to Windows 8.
 
