@@ -1,60 +1,9 @@
-***
-Note from Michael Sync
-
-This is a fork of Unirest-Net https://github.com/thefosk/unirest-net. 
-
-I ported it to Windows 8 RT. 
-
-Here is the change log.
-
- 1. Changed "unirest-net" to "Class Library (Windows Store Apps)"
- 2. Changed "unirest-net-" to "Unit Test Library (Windows Store Apps)"
- 3. Added "Microsoft.Net.Http" nuget package that was relased with Portable Library for RT and Phone. 
- 4. Added "Newtonsoft.Json" nuget package because System.Web.Script.Serialization is not available in Windows RT
- 5. The following changes have been maded in "unirest-net" project. 
-
- 5.1. File Name: unirest-net/unirest-net/src/http/HttpResponse.cs (Note: -- means "remove" and ++ means "added")
-
- 5.1.1.
-      --using System.Web.Script.Serialization;
-      --else if (typeof(Stream).IsAssignableFrom(typeof(T)))
-
-      ++else if (typeof(Stream).GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo()))
-
- 5.1.2.
-	--var serializer = new JavaScriptSerializer();
-	var stringTask = response.Content.ReadAsStringAsync();
-	Task.WaitAll(stringTask);
-	--Body = serializer.Deserialize<T>(stringTask.Result);
-
-	++Body = JsonConvert.DeserializeObject<T>(stringTask.Result);
-
- 5.2. File Name: unirest-net/unirest-net/src/request/HttpRequest.cs
-
- 5.2.1.
-	--using System.Web.Script.Serialization;
-
-	--var serializer = new JavaScriptSerializer();
-	--Body = new MultipartContent { new StringContent(serializer.Serialize(body)) };
-
-	++Body = new MultipartContent { new StringContent(JsonConvert.SerializeObject(body)) };
-
- 6. The following changes have been maded in "unirest-net-test" project. 
-
- 6.1. The original test project was using nunit unit test framework because Nunit Adapter VS extension (beta 5) doesn't work with Win RT for some reasons. So, I changed it to VS unit test framework and removed the Nunit nuget package. 
-
- 6.2. File Name: unirest-net/unirest-net-tests/src/http/UnirestTests.cs. The orignal code is using the capital "P" (e.g. Unitest.Post(..)..) so I changed to the small letter. 
-
-	Unirest.post("http://localhost").HttpMethod.Should().Be(HttpMethod.Post);
-	Unirest.post("http://localhost").URL.OriginalString.Should().Be("http://localhost");
-
-***
-
-Unirest-Net
+Unirest-win8
 ============================================
 
-Unirest is a set of lightweight HTTP libraries available in PHP, Ruby, Python, Java, Objective-C.
-This is a port of the Java library to .NET, and is done independently and without affiliation to the original Unirest project.
+Unirest is a set of lightweight HTTP libraries available in PHP, Ruby, Python, Java, Objective-C, etc...
+
+This is a port of the .NET library to Windows 8.
 
 Documentation
 -------------------
@@ -135,31 +84,3 @@ Parsed response body where applicable, for example JSON responses are parsed to 
 
 `.Raw`  
 Un-parsed response body
-
-
-
-License
----------------
-
-The MIT License
-
-Copyright (c) 2013 Mashape (http://mashape.com)
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
