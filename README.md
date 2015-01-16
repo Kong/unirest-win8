@@ -1,6 +1,6 @@
 # Unirest for Windows 8
 
-Unirest is a set of lightweight HTTP libraries available in multiple languages.
+Unirest is a set of lightweight HTTP libraries available in [multiple languages](http://unirest.io).
 
 This is a port of the .NET library to Windows 8.
 
@@ -55,7 +55,7 @@ HttpResponse<MyClass> myClass = Unirest.post("http://httpbin.org/post")
 
 # Request
 
-The `.NET` Unirest library follows the builder style conventions. 
+The `.NET` Unirest library follows the builder style conventions.
 You start building your request by creating a `HttpRequest` object using one of the following:
 
 ```C#
@@ -75,3 +75,6 @@ Upon recieving a response Unirest returns the result in the form of an `Object`,
 - `.Body` - Parsed response body where applicable, for example JSON responses are parsed to Objects / Associative Arrays.
 - `.Raw` - Un-parsed response body
 
+----
+
+Made with &#9829; from the [Mashape](https://www.mashape.com/) team
